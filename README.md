@@ -10,5 +10,5 @@ Mtr. Edgar Cambranes
 @Irvingpoot
 
 ## Carpetas:
-- 1era Entrega: Contiene todos los documentos creados por cada integrante del equipoy
+- 1era Entrega: Contiene todos los documentos creados por cada integrante del equipo
 - Materiales: Contiene los materiales utilizados por el equipo (Métricas, Bitácoras)

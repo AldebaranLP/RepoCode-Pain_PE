@@ -1,6 +1,6 @@
 # Programacion Estructurada
 Repositorio de programación estructurada 2020 :computer:
-Mtr. Edgar Cambranes
+Mtr. Edgar Cambranes :space_invader:
 
 ## Autores:
 @JonathanGGB
@@ -10,5 +10,6 @@ Mtr. Edgar Cambranes
 @Irvingpoot
 
 ## Carpetas:
-- [1era Entrega](https://github.com/AldebaranLP/RepoCode-Pain_PE/tree/master/1era_Entrega): Contiene todos los documentos creados por cada integrante del equipo
-- Materiales: Contiene los materiales utilizados por el equipo (Métricas, Bitácoras)
+:file_folder: [1era Entrega](https://github.com/AldebaranLP/RepoCode-Pain_PE/tree/master/1era_Entrega): Contiene todos los documentos creados por cada integrante del equipo
+
+:file_folder: [Tareas](https://github.com/AldebaranLP/RepoCode-Pain_PE/tree/master/Tareas): Códigos trabajados en clase online 

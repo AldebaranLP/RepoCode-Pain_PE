@@ -1,3 +1,7 @@
+/*  Author Irving Eduardo Poot Moo
+    Version 1.0.0
+    Program that shows a selected section of a random table NxN
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -17,9 +21,10 @@ int seventh(int auxArr[][N],int checkIns[2],int arr[][N]);
 int eighth(int auxArr[][N],int checkIns[2],int arr[][N]);
 int nineth(int auxArr[][N],int arr[][N]);
 int tenth(int auxArr[][N],int arr[][N]);
-void sayGoodbye();
+void printOriginal(int arr[][N]);
 void printSection(int auxArr[][N]);
 int makeDecition();
+void sayGoodbye();
 
 int main(){
     int decition;
@@ -65,6 +70,7 @@ int main(){
         }
 
         // Outputs
+        printOriginal(arr);
         printSection(auxArr);
 
         //Return Cycle
@@ -538,7 +544,29 @@ int tenth(int auxArr[][N], int arr[][N]){
    }
 }
 
+void printOriginal(int arr[][N]){
+    /* Print the original array
+    Args:
+        i (int): Row
+        j (int): Column
+        arr (array): The random array
+    Returns:
+        The array
+    */
+   int i, j;
 
+   printf("******************************************\n");
+   printf("    -Original Array-    \n");
+   for(i=0; i<N; i++){
+       for(j=0;j<N;j++){
+           printf("(%d,%d: %d) ",i,j,arr[i][j]);
+       }
+       printf("\n");
+   }
+   printf("******************************************\n");
+
+
+}
 
 void printSection(int auxArr[][N]){
     /* Prints the modified array
@@ -555,12 +583,13 @@ void printSection(int auxArr[][N]){
    printf("    -Section Selected-    \n");
    for(i=0;i<N;i++){
        for(j=0;j<N;j++){
-           if(auxArr[i][j]!=-1){
-               printf("(%d,%d: %d) \n",i,j,auxArr[i][j]);
+           if(auxArr[i][j]==-1){
+               printf("         ");
+           }else{
+               printf("(%d,%d: %d) ",i,j,auxArr[i][j]);
            }
-           
        }
-       
+       printf("\n");
    }
    printf("******************************************\n");
 }

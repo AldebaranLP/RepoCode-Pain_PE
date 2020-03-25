@@ -146,7 +146,7 @@ int genArray(int arr[][N], int copyArr[][N]){
     time_t t;
 
     srand((unsigned) time(&t));
-
+    
     for(i=0;i<N;i++){
         for(j=0;j<N;j++){
             arr[i][j]=rand()%10;
@@ -177,8 +177,8 @@ int doOne(int copyArr[][N],int insCheck[], int arr[][N]){
         }
     }else{
         for(i=N-1;i>=0;i--){
-            for(j=(N-1-(N-1-i));j>=0;j--){
-                copyArr[i][j]=arr[N-1-i][j];
+            for(j=0;j<N-i;j++){
+                copyArr[N-1-i][j]=arr[i][j];
             }
         }
     }
@@ -200,14 +200,14 @@ int doTwo(int copyArr[][N],int insCheck[], int arr[][N]){
 
     if(insCheck[1]==1){
         for(i=0;i<N;i++){
-            for(j=0;j<(1+i);j++){
-                copyArr[i][j]=arr[i][N-1+j-i];
+            for(j=0;j<N-(N-1-i);j++){
+                copyArr[i][j+N-1-i]=arr[i][j+N-1-i];
             }
         }
     }else{
         for(i=N-1;i>=0;i--){
-            for(j=N-1;j>=(0+(N-1-i));j--){
-                copyArr[N-1-i][N-1-j]=arr[i][N-1-j+(N-1-i)];
+            for(j=0;j<N-(N-1-i);j++){
+                copyArr[N-1-i][j+N-1-i]=arr[i][j+N-1-i];
             }
         }
     }
@@ -259,13 +259,13 @@ int doFour(int copyArr[][N],int insCheck[], int arr[][N]){
     if(insCheck[1]==1){
         for(i=0;i<N;i++){
             for(j=0;j<N-i;j++){
-                copyArr[i][j]=arr[i][j+i];
+                copyArr[i][j+i]=arr[i][j+i];
             }
         }
     }else{
         for(i=N-1;i>=0;i--){
-            for(j=N-1;j>=N-1-(N-1-i);j--){
-                copyArr[N-1-i][N-1-j]=arr[i][(N-1-j)+i];
+            for(j=i;j<N;j++){
+                copyArr[N-1-i][j]=arr[i][j];
             }
         } 
     }
@@ -286,27 +286,25 @@ int doFive(int copyArr[][N],int insCheck[], int arr[][N]){
     int i,j;
     
     if(insCheck[1]==1){
-        for(i=0;i<N;i++){
-            for(j=0;j<N;j++){
+        for(i=0;i<N/2;i++){
+            for(j=0;j<=i;j++){
                 copyArr[i][j]=arr[i][j];
             }
         }
-        for(i=0;i<N;i++){
-            for(j=1;j<(N-i);j++){
-                copyArr[i][j+i]=-1;
-                copyArr[N-1-i][j+i]=-1;
+        for(i=N/2;i<N;i++){
+            for(j=0;j<N-i;j++){
+                copyArr[i][j]=arr[i][j];
             }
         }
     }else{
-        for(i=0;i<N;i++){
-            for(j=0;j<N;j++){
+        for(i=N-1;i>N/2;i--){
+            for(j=0;j<=N-1-i;j++){
                 copyArr[N-1-i][j]=arr[i][j];
             }
         }
-        for(i=0;i<N;i++){
-            for(j=1;j<(N-i);j++){
-                copyArr[i][j+i]=-1;
-                copyArr[N-1-i][j+i]=-1;
+        for(i=N/2;i>=0;i--){
+            for(j=0;j<=i;j++){
+            copyArr[N-1-i][j]=arr[i][j];
             }
         }
     }
@@ -324,47 +322,24 @@ int doSix(int copyArr[][N],int insCheck[], int arr[][N]){
     Returns: 
         The new array
     */
-    int i,j;
+    int i,j,k;
 
     if(insCheck[1]==1){
-        for(i=0;i<N;i++){
-            for(j=0;j<N;j++){
-                copyArr[i][j]=arr[i][j];
-            }
-        }
-        for(i=0;i<N;i++){
-            for(j=0;j<i;j++){
-                copyArr[i][j]=-1;
-                copyArr[i][N-1-j]=-1;
+        for(i=0;i<=N/2;i++){
+            for(j=0;j<N-2*i;j++){
+                for(k=0;k<i;k++){
+                    copyArr[i][k]=-1;
+                }
+                copyArr[i][j+k]=arr[i][j+i];
             }
         }
     }else{
-        int n=N;
-        if(n%2!=0){
-            n--;
-        }
-
-        for(i=0;i<N;i++){
-            for(j=0;j<N;j++){
-                copyArr[i][j]=arr[i][j];
-            }
-        }
-        for(i=0;i<N;i++){
-            for(j=0;j<i;j++){
-                copyArr[i][j]=-1;
-                copyArr[i][N-1-j]=-1;
-            }
-        }
-        for(i=0;i<(n/2);i++){
-            for(j=0;j<N;j++){
-                copyArr[N-1-i][j]=copyArr[i][j];
-                copyArr[i][j]=-1;
-            }
-        }
-        for(i=0;i<((n/2)+1);i++){
-            for(j=0;j<N;j++){
-                copyArr[i][j]=copyArr[i+(n/2)][j];
-                copyArr[i+(n/2)][j]=-1;
+        for(i=N/2;i<N;i++){
+            for(j=0;j<N-2*(N-1-i);j++){
+                for(k=0;k<N-1-i;k++){
+                    copyArr[i][k]=-1;
+                }
+                copyArr[i-N/2][j+k]=arr[N-1-i][j+N-1-i];
             }
         }
     }
@@ -382,53 +357,28 @@ int doSeven(int copyArr[][N],int insCheck[], int arr[][N]){
     Returns: 
         The new array
     */
-    int i,j,n=N;
-    if(n%2!=0){
-        n++;
-    }
+    int i,j;
     
     if(insCheck[1]==1){
-        for(i=0;i<N;i++){
-            for(j=0;j<N;j++){
-              copyArr[i][j]=arr[i][j];
+        for(i=0;i<N/2;i++){
+            for(j=0;j<=i;j++){
+              copyArr[i][j+N-1-i]=arr[i][N-1-j];
             }
         }
-        for(i=0;i<n/2;i++){
-            for(j=0;j<1+i;j++){
-                copyArr[i][j]=copyArr[i][j+N-1-i];
-            }
-        }
-        for(i=0;i<n/2;i++){
-            for(j=0;j<1+i;j++){
-                copyArr[n/2+i][j]=copyArr[n/2+i][j+n/2];
-            }
-        }
-        for(i=0;i<N;i++){
-            for(j=1;j<(N-i);j++){
-                copyArr[i][j+i]=-1;
-                copyArr[N-1-i][j+i]=-1;
+        for(i=N/2;i<N;i++){
+            for(j=0;j<N-i;j++){
+                copyArr[i][j+i]=arr[i][j+i];
             }
         }
     }else{
-        for(i=0;i<N;i++){
-            for(j=0;j<N;j++){
-              copyArr[N-1-i][j]=arr[i][j];
+        for(i=N-1;i>N/2;i--){
+            for(j=0;j<N-i;j++){
+              copyArr[N-1-i][j+i]=arr[i][j+i];
             }
         }
-        for(i=0;i<n/2;i++){
-            for(j=0;j<1+i;j++){
-                copyArr[i][j]=copyArr[i][j+N-1-i];
-            }
-        }
-        for(i=0;i<n/2;i++){
-            for(j=0;j<1+i;j++){
-                copyArr[n/2+i][j]=copyArr[n/2+i][j+n/2];
-            }
-        }
-        for(i=0;i<N;i++){
-            for(j=1;j<(N-i);j++){
-                copyArr[i][j+i]=-1;
-                copyArr[N-1-i][j+i]=-1;
+        for(i=N/2;i>=0;i--){
+            for(j=0;j<=i;j++){
+                copyArr[N-1-i][j+N-1-i]=arr[i][j+N-1-i];
             }
         }
     }
@@ -446,41 +396,24 @@ int doEight(int copyArr[][N],int insCheck[], int arr[][N]){
     Returns: 
         The new array
     */
-    int i,j;
+    int i,j,k;
 
     if(insCheck[1]==1){
-        for(i=0;i<N;i++){
-            for(j=0;j<N;j++){
-                copyArr[i][j]=arr[i][j];
-            }
-        }
-        for(i=0;i<N;i++){
-            for(j=0;j<(N-i-1);j++){
-                copyArr[i][j+i+1]=-1;
-                copyArr[i][N-1-j-i-1]=-1;
+        for(i=N/2;i<N;i++){
+            for(j=0;j<N-2*(N-1-i);j++){
+                for(k=0;k<N-1-i;k++){
+                    copyArr[i][k]=-1;
+                }
+                copyArr[i][j+k]=arr[i][j+(N-1-i)];
             }
         }
     }else{
-        int n=N;
-        if(n%2!=0){
-            n--;
-        }
-
-       for(i=0;i<N;i++){
-            for(j=0;j<N;j++){
-                copyArr[i][j]=arr[i][j];
-            }
-        }
-        for(i=0;i<(N-1);i++){
-            for(j=0;j<(N-1-i);j++){
-                copyArr[i][j+i+1]=-1;
-                copyArr[i][N-1-j-i-1]=-1;
-            }
-        }
-        for(i=0;i<n/2;i++){
-            for(j=0;j<N;j++){
-                copyArr[i][j]=copyArr[N-1-i][j];
-                copyArr[N-1-i][j]=-1;
+       for(i=N-1;i>=N/2;i--){
+            for(j=0;j<N-2*(N-1-i);j++){
+                for(k=0;k<N-1-i;k++){
+                    copyArr[i][k]=-1;
+                }
+                copyArr[N-1-i][j+k]=arr[i][j+N-1-i];
             }
         }
     }
@@ -497,10 +430,10 @@ int doNine(int copyArr[][N], int arr[][N]){
         The new array
     */
    
-    int i,j=0;
+    int i;
 
     for(i=0;i<N;i++){
-        copyArr[i][j]=arr[i][i];
+        copyArr[i][i]=arr[i][i];
     }
 }
 
@@ -514,10 +447,10 @@ int doTen(int copyArr[][N], int arr[][N]){
     Returns: 
         The new array
     */
-    int i,j=0;
+    int i;
 
     for(i=0;i<N;i++){
-        copyArr[i][j]=arr[i][N-1-i];
+        copyArr[i][N-1-i]=arr[i][N-1-i];
     }
 }
 

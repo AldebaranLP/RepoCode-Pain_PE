@@ -1,6 +1,6 @@
 /*
     Author Joshua Immanuel Meza Magaña
-    Version 1.1.2
+    Version 1.2.0
     Date 22/03/2020
     Program who generates a random table NxN and print the section that the user wants
 */
@@ -22,6 +22,8 @@ int doSeven(int copyArr[][N],int insCheck[2],int arr[][N]);
 int doEight(int copyArr[][N],int insCheck[2],int arr[][N]);
 int doNine(int copyArr[][N],int arr[][N]);
 int doTen(int copyArr[][N],int arr[][N]);
+int doEleven(int copyArr[][N],int arr[][N]);
+int doTwelve(int copyArr[][N],int arr[][N]);
 void printArray(int arr[][N]);
 void printResult(int copyArr[][N]);
 
@@ -55,6 +57,10 @@ int main() {
         doNine(copyArr,arr);
     }else if(insCheck[0]==10){
         doTen(copyArr,arr);
+    }else if(insCheck[0]==11){
+        doEleven(copyArr,arr);
+    }else{
+        doTwelve(copyArr,arr);
     }
 
     /* Output */
@@ -88,12 +94,14 @@ int getInstrA(){
     printf("(8) Section 4             \n");
     printf("(9) Main diagonal         \n");
     printf("(10) Inverse diagonal     \n");
+    printf("(11) Section 2-4          \n");
+    printf("(12) Inverse 1-3          \n");
     printf("----------------------------------------------------\n");
     printf("What do you want to do?: ");
     scanf("%d",&insA);
 
-    if(insA<1 || insA>10){
-        while(insA<1 || insA>10){
+    if(insA<1 || insA>12){
+        while(insA<1 || insA>12){
             printf("ERROR, TRY AGAIN\n");
             scanf("%d",&insA);
         }
@@ -112,7 +120,7 @@ int getInstrB(int insCheck[]){
     */
     int insB=0;
     
-    if(insCheck[0]!=9 && insCheck[0]!=10){
+    if(insCheck[0]!=9 && insCheck[0]!=10 && insCheck[0]!=11 && insCheck[0]!=12){
         printf("----------------------------------------------------\n");
         printf("    Orientations   \n");
         printf("(1) Ascending  (2) Descending          \n"); 
@@ -185,7 +193,7 @@ int doOne(int copyArr[][N],int insCheck[], int arr[][N]){
 }
 
 int doTwo(int copyArr[][N],int insCheck[], int arr[][N]){
-     /*
+    /*
     Do the second sentence
     Args:
         arr (array): Original random array
@@ -453,6 +461,73 @@ int doTen(int copyArr[][N], int arr[][N]){
 
     for(i=0;i<N;i++){
         copyArr[i][N-1-i]=arr[i][N-1-i];
+    }
+}
+
+int doEleven(int copyArr[][N], int arr[][N]){
+    /*
+    Do the eleventh sentence
+    Args:
+        arr (array): Original random array
+        copyArr (array): New array
+        i (int): Row
+        j (int): Column
+        k (int): counter
+    Returns: 
+        The new array
+    */
+    int i,j,k;
+
+    for(i=0;i<=N/2;i++){
+        for(j=0;j<N-2*i;j++){
+            for(k=0;k<i;k++){
+                copyArr[i][k]=-1;
+            }                
+            copyArr[i][j+k]=arr[i][j+i];
+        }
+    }
+    for(i=N/2;i<N;i++){
+        for(j=0;j<N-2*(N-1-i);j++){
+            for(k=0;k<N-1-i;k++){
+                copyArr[i][k]=-1;
+            }
+            copyArr[i][j+k]=arr[i][j+(N-1-i)];
+        }
+    }
+}
+
+int doTwelve(int copyArr[][N], int arr[][N]){
+    /*
+    Do the twelfth sentence
+    Args:
+        arr (array): Original random array
+        copyArr (array): New array
+        i (int): Row
+        j (int): Column
+    Returns: 
+        The new array
+    */
+    int i, j;
+
+    for(i=0;i<N/2;i++){
+        for(j=0;j<=i;j++){
+            copyArr[i][j]=arr[i][j];
+        }
+    }
+    for(i=N/2;i<N;i++){
+        for(j=0;j<N-i;j++){
+            copyArr[i][j]=arr[i][j];
+        }
+    }
+    for(i=0;i<N/2;i++){
+        for(j=0;j<=i;j++){
+            copyArr[i][j+N-1-i]=arr[i][N-1-j];
+        }
+    }
+    for(i=N/2;i<N;i++){
+        for(j=0;j<N-i;j++){
+            copyArr[i][j+i]=arr[i][j+i];
+        }
     }
 }
 

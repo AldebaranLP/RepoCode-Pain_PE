@@ -295,7 +295,7 @@ void recorrerMatriz4Descendente(int arr[][N]){
 }
 
 void recorrerDiagonalPrincipal(int arr[][N]){
-    int i,j;
+    int i;
     
     for(i=0;i<N;i++){
         printf("%d",arr[i][i]);
@@ -305,7 +305,7 @@ void recorrerDiagonalPrincipal(int arr[][N]){
 }
 
 void recorrerDiagonalInvertida(int arr[][N]){
-    int i,j;
+    int i;
     
     for(i=N-1;i>=0;i--){
         printf("%d",arr[i][i]);

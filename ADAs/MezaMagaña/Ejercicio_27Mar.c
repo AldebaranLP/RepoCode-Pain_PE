@@ -1,7 +1,7 @@
 /*
     Author Joshua Immanuel Meza Magaña
     Version 1.0.0
-    Date 22/03/2020
+    Date 27/03/2020
     Program who read and print an array with pointers
 */
 #include <stdio.h>

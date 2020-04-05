@@ -1,7 +1,9 @@
 /*
     Author Joshua Immanuel Meza Magaña
     Version 1.2.0
-    Date 22/03/2020
+        +doEleven - section 2 and 4
+        +doTwelve - section 1 and 3
+    Date 26/03/2020
     Program who generates a random table NxN and print the section that the user wants
 */
 #include <stdio.h>
@@ -95,7 +97,7 @@ int getInstrA(){
     printf("(9) Main diagonal         \n");
     printf("(10) Inverse diagonal     \n");
     printf("(11) Section 2-4          \n");
-    printf("(12) Inverse 1-3          \n");
+    printf("(12) Section 1-3          \n");
     printf("----------------------------------------------------\n");
     printf("What do you want to do?: ");
     scanf("%d",&insA);

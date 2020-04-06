@@ -1,5 +1,5 @@
 //Programa que calcula las operaciones básicas entre dos racionales y que los simplifica
-//Versión 1.0
+//Versión 2.0
 //Realizado por Jonathan Gómez
 #include <stdio.h>
 //Se declara la estructura "racional", la cual hace uso de dos variables que almacenan lo que su nombre dice.

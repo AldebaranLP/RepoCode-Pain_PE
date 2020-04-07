@@ -14,7 +14,7 @@ typedef struct sTable{
 }sudoku;
 
 void saveMemory(sudoku bTable[][N],int,int);
-void genNum(sudoku bTable[][N],int,int);
+void genNum(sudoku bTable[][N],int,int,int *);
 void checkCell(sudoku bTable[][N],int,int,int *);
 void checkLine(sudoku bTable[][N],int,int *);
 void checkVer(sudoku bTable[][N],int,int *);
@@ -24,11 +24,11 @@ void printIfSud(int);
 int main(){
     /* Input */
     sudoku bTable[N][N];
-    int i,j,flag=1;
+    int i,j,flag=1,mod=1;
     for(i=0;i<N;i++){
         for(j=0;j<N;j++){
             saveMemory(bTable,i,j);
-            genNum(bTable,i,j);
+            genNum(bTable,i,j,&mod);
         }
     }
 
@@ -85,7 +85,7 @@ void saveMemory(sudoku bTable[][N],int raw,int col){
     }
 }
 
-void genNum(sudoku bTable[][N],int raw,int col){
+void genNum(sudoku bTable[][N],int raw,int col,int *mod){
     /*
     It fill the 2D array with random numbers
     Args:
@@ -93,6 +93,7 @@ void genNum(sudoku bTable[][N],int raw,int col){
         s (int): double pointer used to generate a 2D array 
         raw (int): raw
         col (int): column
+        mod (int): pointer of a modificator value
         t (time_t): value of time
         i (int): counter
         j (int): counter
@@ -106,10 +107,14 @@ void genNum(sudoku bTable[][N],int raw,int col){
 
     for(i=0;i<N;i++){
         for(j=0;j<N;j++){
-            bTable[raw][col].s[i][j]=rand()%10;
+            bTable[raw][col].s[i][j]=(rand()*(*mod))%10;
+            if(bTable[raw][col].s[i][j]==0){
+                bTable[raw][col].s[i][j]+=1;
+            }
             /*scanf("%d",&bTable[raw][col].s[i][j]);*/
         }
     }
+    *mod+=rand()%10;
 }
 
 void checkCell(sudoku bTable[][N],int raw,int col,int *flag){
